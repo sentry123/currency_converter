@@ -4,9 +4,15 @@ DataFrame,with columns TIME_PERIOD and OBS_VALUE,corresponding to value of
 generic:ObsDimension and generic:ObsValue tags from the XML.OBS_VALUE is converted
 to float.
 """
+import os, sys
+
+dir = os.path.dirname(os.path.realpath(__file__))
+parent = os.path.dirname(dir)
+
+sys.path.append(parent)
 
 import pandas as pd
-from request_handler import request_handler
+from src.request_handler import request_handler
 
 
 def get_exchange_rate(source: str, target: str = "EUR") -> pd.DataFrame:
@@ -16,5 +22,11 @@ def get_exchange_rate(source: str, target: str = "EUR") -> pd.DataFrame:
     :param target: str
     :return: returns a pandas dataframe containing the ObsDimension and ObsValue from the api response xml
     """
-    url = "https://sdw-wsrest.ecb.europa.eu/service/data/EXR/M." + source + "." + target + ".SP00.A?detail=dataonly"
+    url = url_parser()
+    print("url  =>  "+url)
     return request_handler(url)
+
+
+def url_parser(source, target):
+    url = "https://sdw-wsrest.ecb.europa.eu/service/data/EXR/M." + source + "." + target + ".SP00.A?detail=dataonly"
+    return url
