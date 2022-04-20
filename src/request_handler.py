@@ -2,12 +2,6 @@
 request_handler function takes an url :String as an input, parses the xml response from the api call
 and returns a pandas dataframe with the columns 'TIME_PERIOD' and 'OBS_VALUE'.
 """
-import os, sys
-
-dir = os.path.dirname(os.path.realpath(__file__))
-parent = os.path.dirname(dir)
-
-sys.path.append(parent)
 
 import requests
 import pandas as pd
