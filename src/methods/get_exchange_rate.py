@@ -16,9 +16,5 @@ def get_exchange_rate(source: str, target: str = "EUR") -> pd.DataFrame:
     :param target: str
     :return: returns a pandas dataframe containing the ObsDimension and ObsValue from the api response xml
     """
-
     url = "https://sdw-wsrest.ecb.europa.eu/service/data/EXR/M." + source + "." + target + ".SP00.A?detail=dataonly"
     return request_handler(url)
-
-
-print(get_exchange_rate("GBP", "EUR"))
